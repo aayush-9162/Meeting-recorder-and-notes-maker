@@ -1,0 +1,24 @@
+# Meeting recording output folders (per-session WAVs, transcripts, notes)
+meeting_*/
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Diagnostic / one-off scripts
+_analyze_audio.py
+_transcribe_clip.py
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
