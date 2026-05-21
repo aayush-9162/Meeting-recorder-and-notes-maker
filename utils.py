@@ -4,6 +4,13 @@ import logging
 import os
 from datetime import datetime
 
+# Base folder where each recording session's timestamped folder is created.
+# Override with the MEETING_REC_DIR environment variable if you want a different location.
+RECORDINGS_BASE_DIR = os.environ.get(
+    "MEETING_REC_DIR",
+    r"C:\Users\aayus\Desktop\meeting recoding",
+)
+
 
 def setup_logging(log_file: str = "meeting_ai.log", level: int = logging.INFO):
     """Configure logging to both console and file."""
@@ -27,9 +34,10 @@ def save_text(content: str, filepath: str) -> str:
 
 
 def generate_output_dir() -> str:
-    """Create a timestamped output directory and return its path."""
+    """Create a timestamped output directory under RECORDINGS_BASE_DIR and return its path."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    dirname = f"meeting_{timestamp}"
+    os.makedirs(RECORDINGS_BASE_DIR, exist_ok=True)
+    dirname = os.path.join(RECORDINGS_BASE_DIR, f"meeting_{timestamp}")
     os.makedirs(dirname, exist_ok=True)
     return dirname
 
